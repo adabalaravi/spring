@@ -1,0 +1,18 @@
+name: Close Stale PRs
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Runs daily at midnight UTC
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-stale: 1  # Mark PRs as stale after 30 days
+          days-before-close: 3  # Close PRs 7 days after being marked stale
+          stale-pr-label: "stale"
+          exempt-pr-labels: "keep-open"
+          stale-pr-message: "This PR has been marked as stale due to inactivity."
+          close-pr-message: "Closing this PR due to inactivity. Please reopen if needed."
